@@ -49,11 +49,6 @@ body {
   box-shadow: 4px 4px 10px black;
 }
 
-.sendButton {
-  box-shadow: 4px 4px 10px black;
-}
-
-.sendButton,
 .link:active {
   box-shadow: none;
 }

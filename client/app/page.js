@@ -14,9 +14,11 @@ export default async function Home() {
   const username = user?.username
   const userImage = user?.imageUrl
 
+  console.log(username)
+
 
   return (
-    <main className="flex items-center justify-center h-screen pt-14">
+    <main className="flex justify-center h-screen pt-14">
       {
         !userId ? (
             <div className="flex flex-col items-center gap-6  justify-center homePage w-full h-full">

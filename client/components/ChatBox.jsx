@@ -16,7 +16,7 @@ export const ChatSenderBox = ({profilePic, username, message}) => {
           }
         />
 
-        <div className='flex flex-col gap-1 p-3 bg-white rounded-xl text-black'>
+        <div className='flex flex-col gap-1 p-3 bg-white rounded-xl text-black max-w-64'>
           <p className='font-bold'>{username}</p>
           <p>{message}</p>
         </div>
@@ -27,7 +27,7 @@ export const ChatSenderBox = ({profilePic, username, message}) => {
 
 export const ChatRecieverBox = ({profilePic, username, message}) => {
   return (
-    <div className='flex justify-start items-start gap-2'>
+    <div className='flex justify-start items-start gap-2 my-4'>
       <Avatar
         size={50}
         src={

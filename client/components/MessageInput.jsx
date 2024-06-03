@@ -26,7 +26,7 @@ const MessageInput = ({addMessage}) => {
 
       <button 
         onClick={() => sendMessage()}
-        className='text-white font-medium py-2 px-5 rounded-full sendButton'
+        className='text-white font-medium py-2 px-5 rounded-full link'
       >
         SEND
       </button>

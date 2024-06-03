@@ -12,6 +12,7 @@ const ChatContainer = ({username, userImage}) => {
   const [socket, setSocket] = useState(undefined)
   const [allInfo, setAllInfo] = useState([])
 
+
   // sending all info to the socket
   const sendChatToServer = (chat) => {
     socket.emit('chat', chat)
@@ -34,15 +35,23 @@ const ChatContainer = ({username, userImage}) => {
   const addMessage = (chat) => {
     const newChat = {...chat, username, userImage}
 
-    if(newChat.message !== ''){
+    // if(newChat.message !== ''){
 
-      setAllInfo([...allInfo, newChat])
+    //   setAllInfo([...prevState, newChat]);
   
-      sendChatToServer([...allInfo, newChat])
+    //   sendChatToServer([...allInfo, newChat])
 
-    } 
+    // } 
 
+    if (newChat.message !== '') {
+      setAllInfo((prevState) => {
+        const updatedChats = [...prevState, newChat];
+        sendChatToServer(updatedChats);
+      return updatedChats;
+      });
+    }
   }
+
   useEffect(() => {
 
     console.log(allInfo);
@@ -50,32 +59,38 @@ const ChatContainer = ({username, userImage}) => {
   }, [allInfo]);
 
 
-  const ChatsArrangment = () => {
-    return allInfo.map((info, index) => {
-      if(info.username === username) return 
+  const ChatsArrangement = ({ data, username }) => {
+  return data.map((info, index) => {
+    if (username === info.username) {
+      return (
         <ChatSenderBox
           key={index}
           username={info.username}
           profilePic={info.userImage}
           message={info.message}
         />
-        return
-          <ChatRecieverBox
-            key={index}
-            username={info.username}
-            profilePic={info.userImage}
-            message={info.message}
-          />  
-    })
-  }
+      );
+    } else {
+      return (
+        <ChatRecieverBox
+          key={index}
+          username={info.username}
+          profilePic={info.userImage}
+          message={info.message}
+        />
+      );
+    }
+  });
+};
+
 
   return (
-    <div className=' w-full h-full p-4 chatPage'>
-
-      <ChatsArrangment />
-
+    <>
+      <div className=' w-full h-[609px] p-4 chatPage border-2 border-red-50 overflow-auto pb'>
+        {allInfo.length && <ChatsArrangement data={allInfo} username={username}/>}
+      </div>
       <MessageInput addMessage={addMessage}/>
-    </div>
+    </>
   )
 }
 

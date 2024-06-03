@@ -16,9 +16,8 @@ io.on("connection", (socket) => {
 
     // messaged recieved and sent back to the client.
     socket.on("chat", (chat)=>{
-        if(chat.lenght){
-            io.emit("chat", chat)
-        }
+        io.emit("chat", chat)
+
         console.log(chat)
     })
 
